@@ -122,6 +122,12 @@ function build_image {
 
     set -x
     docker buildx bake --progress plain --set "*.context=./.." -f "./docker-bake.hcl" debian-amd64 --print
+    if [ $? -ne 0 ]; then
+        echo "Docker build failed"
+        exit 1
+    fi
+
+    docker images
 
     heroku stack:set container -a "${APP_NAME}"
     heroku container:push web -a "${APP_NAME}"
