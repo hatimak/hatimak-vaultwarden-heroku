@@ -116,10 +116,9 @@ function build_image {
 
     echo "Now we will build the amd64 image to deploy to Heroku with the specified port changes"
 
-    cd ./${VAULTWARDEN_FOLDER}/docker
-    mv Dockerfile.debian Dockerfile
+    cd ./${VAULTWARDEN_FOLDER}
 
-    docker build -t registry.heroku.com/"${APP_NAME}"/web -f Dockerfile .
+    docker build -t registry.heroku.com/"${APP_NAME}"/web .
     if [ $? -ne 0 ]; then
         echo "Docker build failed"
         exit 1
