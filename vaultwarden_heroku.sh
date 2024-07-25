@@ -117,11 +117,9 @@ function build_image {
     echo "Now we will build the amd64 image to deploy to Heroku with the specified port changes"
 
     cd ./${VAULTWARDEN_FOLDER}/docker
-    export SOURCE_COMMIT="$(git rev-parse HEAD)"
-    export SOURCE_VERSION="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null)"
+    mv Dockerfile.debian Dockerfile
 
-    set -x
-    docker buildx bake --progress plain --set "*.context=./.." -f "./docker-bake.hcl" debian-amd64 --print
+    docker build -t registry.heroku.com/"${APP_NAME}"/web -f Dockerfile .
     if [ $? -ne 0 ]; then
         echo "Docker build failed"
         exit 1
