@@ -120,7 +120,7 @@ function build_image {
     export SOURCE_VERSION="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null)"
 
     set -x
-    docker buildx bake --progress plain --set "*.context=./${VAULTWARDEN_FOLDER}/docker/.." -f "./${VAULTWARDEN_FOLDER}/docker/docker-bake.hcl" "debian-amd64 --print"
+    docker buildx bake --progress plain --set "*.context=./${VAULTWARDEN_FOLDER}/docker/.." -f "./${VAULTWARDEN_FOLDER}/docker/docker-bake.hcl" debian-amd64 --print
 
     heroku stack:set container -a "${APP_NAME}"
     heroku container:push web -a "${APP_NAME}"
