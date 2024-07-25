@@ -117,7 +117,11 @@ function build_image {
     echo "Now we will build the amd64 image to deploy to Heroku with the specified port changes"
     export SOURCE_COMMIT="$(git rev-parse HEAD)"
     export SOURCE_VERSION="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null)"
-    sh ./${VAULTWARDEN_FOLDER}/docker/bake.sh debian-amd64 --print
+
+    BASEDIR=$(RL=$(readlink -n "$0"); SP="${RL:-$0}"; dirname "$(cd "$(dirname "${SP}")" || exit; pwd)/$(basename "${SP}")")
+    set -x
+    docker buildx bake --progress plain --set "*.context=${BASEDIR}/.." -f "${BASEDIR}/docker-bake.hcl" "debian-amd64 --print"
+
     heroku stack:set container -a "${APP_NAME}"
     heroku container:push web -a "${APP_NAME}"
 
