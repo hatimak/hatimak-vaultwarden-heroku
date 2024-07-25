@@ -64,7 +64,7 @@ function heroku_bootstrap {
     
     echo "Additionally set an Admin Token too in the event additional options are needed."
     echo "Supressing output due to sensitive nature."
-    heroku config:set ADMIN_TOKEN="$(openssl rand -base64 48)" -a "${APP_NAME}" > /dev/null
+    heroku config:set ADMIN_TOKEN="$(openssl rand -base64 18)" -a "${APP_NAME}" > /dev/null
 
     echo "And set DB connections to seven in order not to saturate the free DB"
     heroku config:set DATABASE_MAX_CONNS=7 -a "${APP_NAME}"
@@ -119,12 +119,6 @@ function build_image {
     cd ./${VAULTWARDEN_FOLDER}
 
     docker build -t registry.heroku.com/"${APP_NAME}"/web .
-    if [ $? -ne 0 ]; then
-        echo "Docker build failed"
-        exit 1
-    fi
-
-    docker images
 
     heroku stack:set container -a "${APP_NAME}"
     heroku container:push web -a "${APP_NAME}"
