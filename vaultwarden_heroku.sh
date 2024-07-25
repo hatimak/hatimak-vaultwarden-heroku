@@ -116,6 +116,7 @@ function build_image {
 
     echo "Now we will build the amd64 image to deploy to Heroku with the specified port changes"
     mv ./${VAULTWARDEN_FOLDER}/docker/Dockerfile.debian ./${VAULTWARDEN_FOLDER}/Dockerfile
+    echo "Changing directory..."
     cd ./${VAULTWARDEN_FOLDER}
     heroku container:push web -a "${APP_NAME}"
 
