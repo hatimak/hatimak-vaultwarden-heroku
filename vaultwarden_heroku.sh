@@ -115,6 +115,7 @@ function build_image {
     heroku container:login
 
     echo "Now we will build the amd64 image to deploy to Heroku with the specified port changes"
+    sh ./${VAULTWARDEN_FOLDER}/docker/bake_env.sh
     sh ./${VAULTWARDEN_FOLDER}/docker/bake.sh debian-amd64 --print
     heroku stack:set container -a "${APP_NAME}"
     heroku container:push web -a "${APP_NAME}"
