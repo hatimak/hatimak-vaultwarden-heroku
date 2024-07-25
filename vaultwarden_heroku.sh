@@ -7,7 +7,7 @@ VAULTWARDEN_FOLDER="vaultwarden"
 CREATE_APP_NAME=" "
 ENABLE_AUTOBUS_BACKUP=0
 ENABLE_DUO=0
-GIT_HASH="main"
+GIT_HASH="d04b94b77d95a9968f61f71969f65aaaa8a496d6"
 USE_PSQL=0
 HEROKU_VERIFIED=0
 OFFSITE_HEROKU_DB=" "
@@ -19,7 +19,7 @@ rm -rf ./${VAULTWARDEN_FOLDER}
 function git_clone {
     GIT_HASH=$1
     echo "Clone current Vaultwarden with depth 1"
-    git clone --depth 1 https://github.com/dani-garcia/vaultwarden.git
+    git clone https://github.com/dani-garcia/vaultwarden.git
     cd ./${VAULTWARDEN_FOLDER}
     git checkout "${GIT_HASH}"
     cd ..
