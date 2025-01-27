@@ -38,6 +38,8 @@ Usage is simple, fast, and user friendly!
  
 Either one of these will force the Github Actions workflow to run and update the app. If you need to modify to enable/disable settings, you should re run it as well.
 
+---
+
 ## Non Verified Heroku Accounts
 Non-verified Heroku accounts cannot use the built in Heroku addons, regardless if they are free or not. This just requires you to do a few more steps and use an outside resources. I have not personally vetted this service, but [FreeMySQLHosting](https://www.freemysqlhosting.net/) has free plans comparable to the JawsDB addon and should be sufficient for usage. It is suggested that regardless of whatever route you take, you take regular constructed backups of your Bitwarden Vault for safety. 
 
